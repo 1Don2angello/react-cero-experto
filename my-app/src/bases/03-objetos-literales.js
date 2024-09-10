@@ -8,11 +8,12 @@ const persona = {
         lat:14.32222,
         lng: 34.9222
     }
-}
-
-console.log (persona);
-
-const persona2 = persona;
-
-console.log(persona2);
-
+  }
+  
+  console.log (persona);
+  
+  const persona2 = {...persona};
+  persona2.nombre= 'peter';
+  console.log(persona2);
+  
+  
