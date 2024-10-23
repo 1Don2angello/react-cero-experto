@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|c:\\xampp\\htdocs\\react-cero-experto\\to-do-api\\to-do-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|solutionrelative:to-do-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|c:\\xampp\\htdocs\\react-cero-experto\\to-do-api\\to-do-api\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|solutionrelative:to-do-api\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\Migrations\\20241023153134_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:To-do-api\\Migrations\\20241023153134_InitialCreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|c:\\xampp\\htdocs\\react-cero-experto\\to-do-api\\to-do-api\\to-do-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|solutionrelative:to-do-api\\to-do-api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|c:\\xampp\\htdocs\\react-cero-experto\\to-do-api\\to-do-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|solutionrelative:to-do-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|c:\\xampp\\htdocs\\react-cero-experto\\to-do-api\\to-do-api\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,6 +21,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|c:\\xampp\\htdocs\\react-cero-experto\\to-do-api\\to-do-api\\models\\todoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|solutionrelative:to-do-api\\models\\todoitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|c:\\xampp\\htdocs\\react-cero-experto\\to-do-api\\to-do-api\\migrations\\20241023153134_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2852E6FF-61CD-4520-8677-321C249DD2D6}|To-do-api\\To-do-api.csproj|solutionrelative:to-do-api\\migrations\\20241023153134_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +34,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TaskController.cs",
               "DocumentMoniker": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\Controllers\\TaskController.cs",
               "RelativeDocumentMoniker": "To-do-api\\Controllers\\TaskController.cs",
@@ -51,7 +51,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "20241023153134_InitialCreate.cs",
               "DocumentMoniker": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\Migrations\\20241023153134_InitialCreate.cs",
               "RelativeDocumentMoniker": "To-do-api\\Migrations\\20241023153134_InitialCreate.cs",
@@ -59,25 +59,24 @@
               "RelativeToolTip": "To-do-api\\Migrations\\20241023153134_InitialCreate.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T15:31:35.368Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T15:31:35.368Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\Program.cs",
               "RelativeDocumentMoniker": "To-do-api\\Program.cs",
               "ToolTip": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\Program.cs",
               "RelativeToolTip": "To-do-api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-23T00:32:02.719Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\Context\\AppDbContext.cs",
               "RelativeDocumentMoniker": "To-do-api\\Context\\AppDbContext.cs",
@@ -85,25 +84,23 @@
               "RelativeToolTip": "To-do-api\\Context\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T00:25:07.14Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T00:25:07.14Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "To-do-api",
+              "Title": "To-do-api.csproj",
               "DocumentMoniker": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\To-do-api.csproj",
               "RelativeDocumentMoniker": "To-do-api\\To-do-api.csproj",
               "ToolTip": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\To-do-api.csproj",
               "RelativeToolTip": "To-do-api\\To-do-api.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-10-23T00:24:16.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T00:24:16.495Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "ToDoItem.cs",
               "DocumentMoniker": "C:\\xampp\\htdocs\\react-cero-experto\\To-do-api\\To-do-api\\Models\\ToDoItem.cs",
               "RelativeDocumentMoniker": "To-do-api\\Models\\ToDoItem.cs",
@@ -111,8 +108,7 @@
               "RelativeToolTip": "To-do-api\\Models\\ToDoItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T00:23:47.159Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T00:23:47.159Z"
             }
           ]
         }
