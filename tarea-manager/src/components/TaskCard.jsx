@@ -1,58 +1,43 @@
-// src/components/TaskCard.jsx
-import PropTypes from 'prop-types'; // Asegúrate de instalar prop-types si no lo tienes
+// TaskCard.jsx
+import PropTypes from 'prop-types';
 import { useState } from 'react';
+
 const TaskCard = ({ task }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpanded = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  const getPriorityLabel = (diasRestantes) => {
-    if (diasRestantes <= 1) return 'Alta';
-    if (diasRestantes <= 3) return 'Media';
-    return 'Baja';
-  };
+  const toggleExpand = () => setIsExpanded(!isExpanded);
 
   return (
-    <div className="task-card" style={styles.card}>
-      <h3 onClick={toggleExpanded} style={{ cursor: 'pointer' }}>
-        {task.Titulo} - {task.Materia}
-      </h3>
-      <p>Prioridad: {getPriorityLabel(task.DiasRestantes)}</p>
+    <div className="task-card" onClick={toggleExpand}>
+      <h3>{task.titulo}</h3>
+      <p>Materia: {task.materia}</p>
+      <p>Urgente: {task.urgente ? 'Sí' : 'No'}</p>
+
       {isExpanded && (
-        <div>
-          <p>Fecha Recibida: {new Date(task.FechaRecibida).toLocaleDateString()}</p>
-          <p>Fecha de Entrega: {new Date(task.FechaEntrega).toLocaleDateString()}</p>
+        <div className="task-details">
+          <p>Fecha Recibida: {task.fechaRecibida}</p>
+          <p>Fecha Entrega: {task.fechaEntrega}</p>
           <p>Días Restantes: {task.DiasRestantes}</p>
-          <p>Documentos: {task.Documentos}</p>
-          <p>Tipo: {task.Tipo}</p>
+          <p>Prioridad: {task.prioridad}</p>
+          <p>Documentos: {task.documentos}</p>
+          <p>Tipo: {task.tipo}</p>
         </div>
       )}
     </div>
   );
 };
 
-const styles = {
-  card: {
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    padding: '10px',
-    margin: '10px 0',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-  },
-};
-
-// Validación de tipos de propiedades
 TaskCard.propTypes = {
   task: PropTypes.shape({
-    Titulo: PropTypes.string.isRequired,
-    Materia: PropTypes.string.isRequired,
+    titulo: PropTypes.string.isRequired,
+    materia: PropTypes.string.isRequired,
+    urgente: PropTypes.bool.isRequired,
+    fechaRecibida: PropTypes.string.isRequired,
+    fechaEntrega: PropTypes.string.isRequired,
     DiasRestantes: PropTypes.number.isRequired,
-    FechaRecibida: PropTypes.string.isRequired,
-    FechaEntrega: PropTypes.string.isRequired,
-    Documentos: PropTypes.string,
-    Tipo: PropTypes.string,
+    prioridad: PropTypes.string.isRequired,
+    documentos: PropTypes.string.isRequired,
+    tipo: PropTypes.string.isRequired,
   }).isRequired,
 };
 

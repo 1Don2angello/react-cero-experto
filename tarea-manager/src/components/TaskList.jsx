@@ -1,4 +1,4 @@
-// src/components/TaskList.jsx
+// TaskList.jsx
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import TaskCard from './TaskCard';
@@ -12,7 +12,7 @@ const TaskList = () => {
       const updatedTasks = response.data.map((task) => ({
         ...task,
         DiasRestantes: Math.ceil(
-          (new Date(task.FechaEntrega) - new Date()) / (1000 * 60 * 60 * 24)
+          (new Date(task.fechaEntrega) - new Date()) / (1000 * 60 * 60 * 24)
         ),
       }));
       setTasks(updatedTasks);
@@ -27,8 +27,8 @@ const TaskList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Gestor de Tareas</h1>
+    <div className="task-list">
+      <h1>Lista de Tareas</h1>
       {tasks.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
