@@ -1,17 +1,14 @@
-version: 2.1  # Versión 2.1 ya es la predeterminada y recomendada
+version: 2.1  # Esta versión es la predeterminada y se recomienda
 
 jobs:
   build:
     docker:
-      - image: cimg/node:14.17  # Usando el espacio de nombres `cimg` actualizado
+      - image: cimg/node:16.10  # Cambiamos al espacio de nombres 'cimg'
     steps:
-      - checkout  # Obtiene el código del repositorio
+      - checkout  # Obtener el código del repositorio
       - run:
           name: Instalación de dependencias
           command: npm install
-      - run:
-          name: Ejecutar pruebas
-          command: npm test
       - run:
           name: Validar archivos HTML, CSS y JS
           command: |
@@ -20,6 +17,9 @@ jobs:
             else
               echo "Todos los archivos están presentes"
             fi
+      - run:
+          name: Ejecutar pruebas
+          command: npm test
 
 workflows:
   build_and_test:
