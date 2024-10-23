@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  build-frontend:
+    docker:
+      - image: circleci/node:14.17.0  # Imagen de Node.js para React
+    steps:
+      - checkout
+      - run:
+          name: Instalar dependencias
+          command: npm install
+      - run:
+          name: Ejecutar pruebas de React
+          command: npm test -- --watchAll=false
+
+  build-backend:
+    docker:
+      - image: circleci/dotnet:6.0  # Imagen de .NET para backend
+    steps:
+      - checkout
+      - run:
+          name: Restaurar dependencias
+          command: dotnet restore
+      - run:
+          name: Compilar y ejecutar pruebas de ASP.NET
+          command: dotnet test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build-frontend
+      - build-backend
