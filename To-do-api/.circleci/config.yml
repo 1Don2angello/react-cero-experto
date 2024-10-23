@@ -1,42 +1,25 @@
 version: 2.1
+
 jobs:
-  # running commands on a basic image
-  Hello-World:
+  build:
     docker:
-      - image: cimg/base:2021.04
+      - image: mcr.microsoft.com/dotnet/sdk:8.0  # O usa la versión que necesites
     steps:
+      - checkout  # Obtén el código del repositorio
       - run:
-          name: Saying Hello
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-  # fetching code from the repo
-  Fetch-Code:
-    docker:
-      - image: cimg/base:2021.04
-    steps:
-      - checkout
+          name: Instalar dependencias
+          command: dotnet restore  # Restaura las dependencias del proyecto
       - run:
-          name: Getting the Code
-          command: |
-            ls -al
-            echo '^^^Your repo files^^^'
-  # running a node container
-  Using-Node:
-    docker:
-      - image: cimg/node:17.2
-    steps:
+          name: Construir la aplicación
+          command: dotnet build --configuration Release --no-restore
       - run:
-          name: Running the Node Container
-          command: |
-            node -v
+          name: Ejecutar pruebas
+          command: dotnet test --no-build --verbosity normal
+      - run:
+          name: Publicar "Hello World"
+          command: echo "Hello from .NET Core API!"
+
 workflows:
-  Example-Workflow:
+  build-and-test:
     jobs:
-      - Hello-World
-      - Fetch-Code:
-          requires:
-            - Hello-World
-      - Using-Node:
-          requires:
-            - Fetch-Code
+      - build
