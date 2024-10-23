@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - run: echo "Construcción completada"
+      - run: echo "Validando archivos HTML, CSS y JS"
+      - run: |
+          if [[ ! -f index.html || ! -f styles.css || ! -f script.js ]]; then
+            echo "Faltan archivos" && exit 1;
+          fi
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
