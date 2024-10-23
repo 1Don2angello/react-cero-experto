@@ -2,59 +2,72 @@
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  background-color: #121212; /* Fondo oscuro */
+  color: #ffffff; /* Texto claro */
 }
 
 .container {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #1e1e1e; /* Fondo del contenedor */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
 }
 
 /* Header */
 h1 {
   text-align: center;
-  color: #333;
+  color: #ffffff; /* Texto del encabezado claro */
   margin-bottom: 20px;
+  background-color: #ffffff;
 }
 
-/* Task Form */
-.task-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.task-form input[type="text"],
-.task-form input[type="date"] {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
+/* Task Card */
+.task-card {
+  text-align: justify; /* Texto justificado */
+  padding: 1rem;
+  border: 1px solid #333; /* Borde claro */
   border-radius: 5px;
-  font-size: 16px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+  background-color: #292929; /* Fondo de la tarjeta */
 }
 
-.task-form button {
-  padding: 10px 20px;
-  background-color: #28a745;
+.task-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.5em;
+  color: #ffffff; /* Texto claro */
+  overflow-wrap: break-word; 
+}
+
+.task-details {
+  margin-top: 0.5rem;
+  background-color: #424242; /* Fondo de detalles */
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+/* Button Container */
+.button-container {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  justify-content: flex-end; /* Alinear botones a la derecha */
+}
+
+.task-card button {
+  background-color: #dc3545; /* Color del botón */
   color: white;
   border: none;
+  padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.task-form button:hover {
-  background-color: #218838;
+.task-card button:hover {
+  background-color: #c82333; /* Hover del botón */
 }
 
 /* Task List */
@@ -70,54 +83,25 @@ h1 {
   align-items: center;
   padding: 15px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #444; /* Borde de tarjeta */
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #2c2c2c; /* Fondo de tarea */
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .task-card:hover {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
   transform: scale(1.02);
-}
-
-.task-card h3 {
-  margin: 0 0 8px;
-  font-size: 1.5em;
-  color: #333;
 }
 
 .task-card p {
   margin: 4px 0;
-  color: #555;
-  font-size: 14px;
-}
-
-.task-card button {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.task-card button:hover {
-  background-color: #c82333;
-}
-
-/* Task Details */
-.task-details {
-  background-color: #eef;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 10px;
+  color: #ffffff; /* Texto claro */
 }
 
 /* Error Messages */
 .error {
-  color: red;
+  color: #ff4081; /* Color de error */
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -146,4 +130,19 @@ h1 {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+}
+
+input[type="text"], select {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border: 1px solid #555; /* Borde claro */
+  border-radius: 5px;
+  background-color: #333; /* Fondo de input */
+  color: #ffffff; /* Texto claro */
+}
+
+input[type="text"]::placeholder,
+select {
+  color: #aaa; /* Color del placeholder */
 }

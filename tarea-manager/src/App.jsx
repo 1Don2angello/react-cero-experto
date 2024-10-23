@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskList from './components/TaskList';
-import TaskForm from './components/TaskForm';
+//import TaskForm from './components/TaskForm';
 import './App.css';
 
 const App = () => {
@@ -22,9 +22,10 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1>Gestor de Tareas</h1>
-      <TaskForm fetchTasks={fetchTasks} />
+      <h1>Proyecto de Tareas</h1>
       <TaskList tasks={tasks} fetchTasks={fetchTasks} />
+
+
     </div>
   );
 };

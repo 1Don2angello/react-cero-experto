@@ -1,7 +1,8 @@
+// TaskForm.jsx
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const TaskForm = ({ onAddTask }) => {
+const TaskForm = ({ onSubmit, initialData }) => {
   const [task, setTask] = useState({
     titulo: '',
     materia: '',
@@ -13,6 +14,13 @@ const TaskForm = ({ onAddTask }) => {
     tipo: '',
   });
   const [error, setError] = useState('');
+
+  // Cargar datos iniciales para edición
+  useEffect(() => {
+    if (initialData) {
+      setTask(initialData);
+    }
+  }, [initialData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +38,7 @@ const TaskForm = ({ onAddTask }) => {
 
     const diasRestantes = Math.ceil((new Date(task.fechaEntrega) - new Date(task.fechaRecibida)) / (1000 * 60 * 60 * 24));
     
-    onAddTask({ ...task, diasRestantes });
+    onSubmit({ ...task, diasRestantes });
     
     // Reiniciar el formulario
     setTask({
@@ -97,13 +105,14 @@ const TaskForm = ({ onAddTask }) => {
         value={task.tipo}
         onChange={(e) => setTask({ ...task, tipo: e.target.value })}
       />
-      <button type="submit">Añadir Tarea</button>
+      <button type="submit">{initialData ? 'Actualizar' : 'Añadir'} Tarea</button>
     </form>
   );
 };
 
 TaskForm.propTypes = {
-  onAddTask: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  initialData: PropTypes.object,
 };
 
 export default TaskForm;
