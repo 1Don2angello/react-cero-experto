@@ -9,7 +9,7 @@ jobs:
       - run: echo "Construcción completada"
       - run: echo "Validando archivos HTML, CSS y JS"
       - run: |
-          if [[ ! -f index.html || ! -f styles.css || ! -f script.js ]]; then
+          if [[ ! -f index.html || ! -f styles.css || ! -f app.js ]]; then
             echo "Faltan archivos" && exit 1;
           fi
 
