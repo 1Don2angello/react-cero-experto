@@ -1,27 +1,24 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@6.3.0  # Usamos el orb de Node.js
+  node: circleci/node@5.0.2
 
 jobs:
   build_and_test:
-    executor: node/default  # Usamos el executor por defecto de Node.js
+    executor: node/default
     steps:
-      - checkout  # Clona el repositorio
+      - checkout
       - node/install-packages:
-          pkg-manager: npm  # Instala las dependencias con Yarn
+          pkg-manager: npm
       - run:
-          name: Run tests  # Ejecuta las pruebas
+          command: npm run lint
+      - run:
+          command: npm run build
+      - run:
           command: npm test
-      - run:
-          name: Build app  # Compila la aplicación
-          command: npm build
-      - persist_to_workspace:  # Guarda los resultados de la compilación para otros jobs
-          root: ~/tarea-manager - copia
-          paths:
-            - .
 
 workflows:
-  test_my_app:
+  version: 2
+  build:
     jobs:
-      - build_and_test  # Ejecuta las pruebas y compila la aplicación
+      - build_and_test
