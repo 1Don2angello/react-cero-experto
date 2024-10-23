@@ -1,20 +1,27 @@
-version: 2.1
+version: 2.1  # Versión 2.1 ya es la predeterminada y recomendada
 
 jobs:
   build:
     docker:
-      - image: circleci/node:14
+      - image: cimg/node:14.17  # Usando el espacio de nombres `cimg` actualizado
     steps:
-      - checkout
-      - run: echo "Construcción completada"
-      - run: echo "Validando archivos HTML, CSS y JS"
-      - run: |
-          if [[ ! -f index.html || ! -f styles.css || ! -f app.js ]]; then
-            echo "Faltan archivos" && exit 1;
-          fi
+      - checkout  # Obtiene el código del repositorio
+      - run:
+          name: Instalación de dependencias
+          command: npm install
+      - run:
+          name: Ejecutar pruebas
+          command: npm test
+      - run:
+          name: Validar archivos HTML, CSS y JS
+          command: |
+            if [[ ! -f index.html || ! -f styles.css || ! -f app.js ]]; then
+              echo "Faltan archivos necesarios" && exit 1;
+            else
+              echo "Todos los archivos están presentes"
+            fi
 
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - build
