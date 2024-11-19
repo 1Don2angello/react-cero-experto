@@ -1,89 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { fetchSchedules, addSchedule } from '../services/database';
+import { logInfo, logError } from '../utils/logger';
 
-type ScheduleItem = {
-  id: number;
-  name: string;
-  start: Date;
-  end: Date;
-};
+const ScheduleValidator = () => {
+  const [schedules, setSchedules] = useState<{ subject: string; start: string; end: string }[]>(
+    []
+  );
 
-type ScheduleValidatorProps = {
-  schedule: ScheduleItem[];
-  onValidate: (validSchedule: ScheduleItem[]) => void;
-};
-
-const ScheduleValidator: React.FC<ScheduleValidatorProps> = ({ schedule, onValidate }) => {
-  const validateSchedule = () => {
-    const conflicts: ScheduleItem[] = [];
-
-    // Validar conflictos en el horario
-    for (let i = 0; i < schedule.length; i++) {
-      for (let j = i + 1; j < schedule.length; j++) {
-        const itemA = schedule[i];
-        const itemB = schedule[j];
-
-        if (
-          (itemA.start < itemB.end && itemA.end > itemB.start) || 
-          (itemB.start < itemA.end && itemB.end > itemA.start)
-        ) {
-          conflicts.push(itemA, itemB);
-        }
+  useEffect(() => {
+    const loadSchedules = async () => {
+      try {
+        const date = '2024-11-15'; // Puedes hacer que esta fecha sea dinámica
+        const scheduleData = await fetchSchedules(date);
+        const scheduleArray = Object.entries(scheduleData).map(([subject, schedule]: any) => ({
+          subject,
+          ...schedule,
+        }));
+        setSchedules(scheduleArray);
+        logInfo('Horarios cargados:', { date, count: scheduleArray.length });
+      } catch (error) {
+        logError('Error al cargar horarios', error);
       }
-    }
+    };
 
-    if (conflicts.length > 0) {
-      alert('Se encontraron conflictos en el horario');
-    } else {
-      alert('El horario es válido');
-    }
+    loadSchedules();
+  }, []);
 
-    const validSchedule = schedule.filter((item) => !conflicts.includes(item));
-    onValidate(validSchedule);
+  const handleAddSchedule = async () => {
+    try {
+      const newSchedule = { start: '14:00', end: '15:30' };
+      await addSchedule('2024-11-15', 'nueva_materia', newSchedule);
+      logInfo('Horario agregado:', { date: '2024-11-15', subject: 'nueva_materia', newSchedule });
+    } catch (error) {
+      logError('Error al agregar horario', error);
+    }
   };
 
   return (
-    <div>
-      <h2 style={styles.title}>Lista de Horarios</h2>
-      <ul style={styles.list}>
-        {schedule.map((item) => (
-          <li key={item.id} style={styles.listItem}>
-            <strong>{item.name}</strong>: {item.start.toLocaleString()} - {item.end.toLocaleString()}
-          </li>
-        ))}
-      </ul>
-      <button style={styles.button} onClick={validateSchedule}>Validar Horario</button>
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.title}>Horarios para el 2024-11-15</Text>
+      {schedules.map((schedule, index) => (
+        <Text key={index} style={styles.schedule}>
+          {schedule.subject}: {schedule.start} - {schedule.end}
+        </Text>
+      ))}
+      <Button title="Agregar Nuevo Horario" onPress={handleAddSchedule} />
+    </View>
   );
 };
 
-const styles: Record<string, React.CSSProperties> = {
-  title: {
-    fontSize: '20px',
-    color: '#333',
-    marginBottom: '10px',
-  },
-  list: {
-    listStyle: 'none',
-    padding: 0,
-    margin: 0,
-  },
-  listItem: {
-    marginBottom: '10px',
-    padding: '10px',
-    backgroundColor: '#f9f9f9',
-    borderRadius: '5px',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  button: {
-    marginTop: '20px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    padding: '10px 20px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    fontSize: '16px',
-  },
-};
+const styles = StyleSheet.create({
+  container: { padding: 20 },
+  title: { fontSize: 18, fontWeight: 'bold', marginBottom: 10 },
+  schedule: { fontSize: 16, marginBottom: 5 },
+});
 
 export default ScheduleValidator;
