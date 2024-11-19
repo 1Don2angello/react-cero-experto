@@ -1,13 +1,15 @@
 import React from 'react';
+import { View, Text } from 'react-native'; // Asegúrate de agregar esta importación
 import NotificationHandler from '../../components/NotificationHandler';
 
 const NotificationsScreen: React.FC = () => {
   return (
-    <div>
-      <h1>Notificaciones</h1>
-      {/* Integrar NotificationHandler aquí */}
+    <View>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}>
+        Notificaciones
+      </Text>
       <NotificationHandler />
-    </div>
+    </View>
   );
 };
 

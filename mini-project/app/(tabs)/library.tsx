@@ -1,41 +1,29 @@
-import React, { useState } from 'react';
-import { View, TextInput, FlatList, Text, StyleSheet } from 'react-native';
+// Library.tsx
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import BookSearch from '../../components/BookSearch'; // Importando el componente de búsqueda de libros
 
-const BookSearch = () => {
-  const [search, setSearch] = useState('');
-  const books = [
-    { id: '1', title: 'El Quijote' },
-    { id: '2', title: 'Cien Años de Soledad' },
-    { id: '3', title: 'Don Juan Tenorio' },
-  ];
-
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(search.toLowerCase())
-  );
-
+const Library = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Buscar Libros</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Ingresa el título del libro"
-        value={search}
-        onChangeText={setSearch}
-      />
-      <FlatList
-        data={filteredBooks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Text style={styles.book}>{item.title}</Text>}
-      />
+      <Text style={styles.title}>Biblioteca</Text>
+      <BookSearch /> {/* Incluir el componente que gestiona la búsqueda de libros */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { padding: 20 },
-  title: { fontSize: 18, fontWeight: 'bold', marginBottom: 10 },
-  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 10 },
-  book: { padding: 5, fontSize: 16 },
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f8f9fa',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
 });
 
-export default BookSearch;
+export default Library;

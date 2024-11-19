@@ -1,37 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { fetchSchedules, addSchedule } from '../services/database';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { fetchSchedules, addSchedule } from '../services/database'; // Para manejar la base de datos
 import { logInfo, logError } from '../utils/logger';
 
-const ScheduleValidator = () => {
-  const [schedules, setSchedules] = useState<{ subject: string; start: string; end: string }[]>(
-    []
-  );
-
-  useEffect(() => {
-    const loadSchedules = async () => {
-      try {
-        const date = '2024-11-15'; // Puedes hacer que esta fecha sea dinámica
-        const scheduleData = await fetchSchedules(date);
-        const scheduleArray = Object.entries(scheduleData).map(([subject, schedule]: any) => ({
-          subject,
-          ...schedule,
-        }));
-        setSchedules(scheduleArray);
-        logInfo('Horarios cargados:', { date, count: scheduleArray.length });
-      } catch (error) {
-        logError('Error al cargar horarios', error);
-      }
-    };
-
-    loadSchedules();
-  }, []);
-
+const ScheduleValidator = ({ schedule, setSchedule }: any) => {
   const handleAddSchedule = async () => {
     try {
       const newSchedule = { start: '14:00', end: '15:30' };
-      await addSchedule('2024-11-15', 'nueva_materia', newSchedule);
-      logInfo('Horario agregado:', { date: '2024-11-15', subject: 'nueva_materia', newSchedule });
+      await addSchedule('2024-11-15', 'nueva_materia', newSchedule); // Fecha y materia son personalizables
+      logInfo('Horario agregado', { date: '2024-11-15', subject: 'nueva_materia', newSchedule });
+      
+      // Refrescar los horarios después de agregar uno nuevo
+      const updatedSchedules = await fetchSchedules('2024-11-15');
+      setSchedule(updatedSchedules);
     } catch (error) {
       logError('Error al agregar horario', error);
     }
@@ -40,9 +21,9 @@ const ScheduleValidator = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Horarios para el 2024-11-15</Text>
-      {schedules.map((schedule, index) => (
+      {schedule.map((sched: any, index: number) => (
         <Text key={index} style={styles.schedule}>
-          {schedule.subject}: {schedule.start} - {schedule.end}
+          {sched.subject}: {sched.start} - {sched.end}
         </Text>
       ))}
       <Button title="Agregar Nuevo Horario" onPress={handleAddSchedule} />

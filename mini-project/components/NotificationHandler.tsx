@@ -1,21 +1,32 @@
 import React, { useState } from 'react';
 import { View, Button, StyleSheet, Text } from 'react-native';
+import * as Notifications from 'expo-notifications';
 
 const NotificationSimulator = () => {
   const [notification, setNotification] = useState<string | null>(null);
 
-  const sendNotification = () => {
+  const sendNotification = async () => {
     const simulatedNotification = {
       title: 'Recordatorio',
       body: 'Recuerda revisar tus tareas.',
+      // Asegúrate de configurar correctamente el "trigger" con el tipo 'date'
+      trigger: {
+        type: 'date', // Especifica el tipo correcto para la fecha
+        date: new Date(new Date().getTime() + 5000), // Configura el tiempo como 5 segundos después de ahora
+      },
     };
 
-    setNotification(`📢 ${simulatedNotification.title}: ${simulatedNotification.body}`);
+    try {
+      await Notifications.scheduleNotificationAsync(simulatedNotification);
+      setNotification(`📢 ${simulatedNotification.title}: ${simulatedNotification.body}`);
+    } catch (error) {
+      console.error('Error al programar la notificación:', error);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Button title=" Notificación" onPress={sendNotification} />
+      <Button title="Notificación" onPress={sendNotification} />
       {notification && (
         <View style={styles.notificationBox}>
           <Text style={styles.notificationText}>{notification}</Text>

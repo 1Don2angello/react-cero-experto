@@ -1,51 +1,113 @@
-import React, { useState } from 'react';
-import ScheduleValidator from '../../components/ScheduleValidator';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
+import { fetchSchedules, addSchedule, updateSchedule, deleteSchedule } from '../../services/database'; // Asegúrate de que las funciones de CRUD están implementadas
+import { logInfo, logError } from '../../utils/logger';
 
-const App: React.FC = () => {
-  const [schedule, setSchedule] = useState([
-    { id: 1, name: 'Clase de Matemáticas', start: new Date('2024-11-15T08:00'), end: new Date('2024-11-15T10:00') },
-    { id: 2, name: 'Clase de Física', start: new Date('2024-11-15T09:30'), end: new Date('2024-11-15T11:00') },
-    { id: 3, name: 'Clase de Química', start: new Date('2024-11-15T11:00'), end: new Date('2024-11-15T12:30') },
-  ]);
+const ScheduleScreen: React.FC = () => {
+  const [schedule, setSchedule] = useState<any[]>([]); // Estado para los horarios
+  const [newSchedule, setNewSchedule] = useState({ start: '', end: '', subject: '' });
+
+  // Cargar los horarios desde Firebase
+  useEffect(() => {
+    const loadSchedules = async () => {
+      try {
+        const date = '2024-11-15';
+        const scheduleData = await fetchSchedules(date);
+        const scheduleArray = Object.entries(scheduleData).map(([subject, schedule]: any) => ({
+          subject,
+          ...schedule,
+        }));
+        setSchedule(scheduleArray);
+      } catch (error) {
+        logError('Error al cargar los horarios', error);
+      }
+    };
+
+    loadSchedules();
+  }, []);
+
+  // Agregar un nuevo horario
+  const handleAddSchedule = async () => {
+    try {
+      await addSchedule('2024-11-15', newSchedule.subject, { start: newSchedule.start, end: newSchedule.end });
+      logInfo('Horario agregado', { date: '2024-11-15', subject: newSchedule.subject, newSchedule });
+      
+      // Refrescar los horarios después de agregar
+      const updatedSchedules = await fetchSchedules('2024-11-15');
+      setSchedule(updatedSchedules);
+    } catch (error) {
+      logError('Error al agregar horario', error);
+    }
+  };
+
+  // Actualizar un horario
+  const handleUpdateSchedule = async (subject: string) => {
+    try {
+      const updatedSchedule = { start: '15:00', end: '16:30' }; // Aquí debes usar los valores que quieras actualizar
+      await updateSchedule('2024-11-15', subject, updatedSchedule);
+      logInfo('Horario actualizado', { date: '2024-11-15', subject, updatedSchedule });
+
+      // Refrescar los horarios después de actualizar
+      const updatedSchedules = await fetchSchedules('2024-11-15');
+      setSchedule(updatedSchedules);
+    } catch (error) {
+      logError('Error al actualizar horario', error);
+    }
+  };
+
+  // Eliminar un horario
+  const handleDeleteSchedule = async (subject: string) => {
+    try {
+      await deleteSchedule('2024-11-15', subject);
+      logInfo('Horario eliminado', { date: '2024-11-15', subject });
+
+      // Refrescar los horarios después de eliminar
+      const updatedSchedules = await fetchSchedules('2024-11-15');
+      setSchedule(updatedSchedules);
+    } catch (error) {
+      logError('Error al eliminar horario', error);
+    }
+  };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Gestor de Horarios</h1>
-      <div style={styles.scheduleContainer}>
-        <ScheduleValidator
-          schedule={schedule}
-          onValidate={(validSchedule) => {
-            console.log('Horarios válidos:', validSchedule);
-            setSchedule(validSchedule);
-          }}
-        />
-      </div>
-    </div>
+    <View style={styles.container}>
+      <Text style={styles.title}>Gestor de Horarios</Text>
+      {schedule.map((sched, index) => (
+        <View key={index} style={styles.scheduleBox}>
+          <Text style={styles.scheduleText}>{sched.subject}: {sched.start} - {sched.end}</Text>
+          <Button title="Actualizar" onPress={() => handleUpdateSchedule(sched.subject)} />
+          <Button title="Eliminar" onPress={() => handleDeleteSchedule(sched.subject)} />
+        </View>
+      ))}
+      <TextInput
+        style={styles.input}
+        placeholder="Materia"
+        value={newSchedule.subject}
+        onChangeText={(text) => setNewSchedule({ ...newSchedule, subject: text })}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Inicio"
+        value={newSchedule.start}
+        onChangeText={(text) => setNewSchedule({ ...newSchedule, start: text })}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Fin"
+        value={newSchedule.end}
+        onChangeText={(text) => setNewSchedule({ ...newSchedule, end: text })}
+      />
+      <Button title="Agregar Nuevo Horario" onPress={handleAddSchedule} />
+    </View>
   );
 };
 
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    fontFamily: 'Arial, sans-serif',
-    padding: '20px',
-    textAlign: 'center' as const,
-    backgroundColor: '#f5f5f5',
-    borderRadius: '10px',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    maxWidth: '600px',
-    margin: '20px auto',
-  },
-  title: {
-    color: '#333',
-    fontSize: '24px',
-    marginBottom: '20px',
-  },
-  scheduleContainer: {
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    padding: '15px',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-};
+const styles = StyleSheet.create({
+  container: { padding: 20 },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
+  scheduleBox: { marginBottom: 10, padding: 10, backgroundColor: '#e2e2e2', borderRadius: 5 },
+  scheduleText: { fontSize: 16 },
+  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 10 },
+});
 
-export default App;
+export default ScheduleScreen;
