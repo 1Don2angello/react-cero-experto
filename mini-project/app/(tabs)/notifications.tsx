@@ -22,10 +22,9 @@ const NotificationHandler = () => {
         body: 'Recuerda revisar tus tareas.',
       },
       trigger: {
-        type: 'timeInterval', // Tipo necesario
         seconds: 5, // Tiempo en segundos
         repeats: false, // Define si se repite o no
-      },
+      } as Notifications.TimeIntervalTriggerInput, // Asegura el tipo explícito
     });
   };
 
