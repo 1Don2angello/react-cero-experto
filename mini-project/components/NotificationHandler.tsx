@@ -7,18 +7,20 @@ const NotificationSimulator = () => {
 
   const sendNotification = async () => {
     const simulatedNotification = {
-      title: 'Recordatorio',
-      body: 'Recuerda revisar tus tareas.',
-      // Asegúrate de configurar correctamente el "trigger" con el tipo 'date'
+      content: {
+        title: 'Recordatorio',
+        body: 'Recuerda revisar tus tareas.',
+      },
       trigger: {
-        type: 'date', // Especifica el tipo correcto para la fecha
+        type: Notifications.NotificationTriggerInputType.DATE,  // Especificamos el tipo correcto
         date: new Date(new Date().getTime() + 5000), // Configura el tiempo como 5 segundos después de ahora
       },
     };
 
     try {
+      // Programar la notificación con el objeto adecuado
       await Notifications.scheduleNotificationAsync(simulatedNotification);
-      setNotification(`📢 ${simulatedNotification.title}: ${simulatedNotification.body}`);
+      setNotification(`📢 ${simulatedNotification.content.title}: ${simulatedNotification.content.body}`);
     } catch (error) {
       console.error('Error al programar la notificación:', error);
     }

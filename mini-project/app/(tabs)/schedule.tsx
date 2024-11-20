@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
-import { fetchSchedules, addSchedule, updateSchedule, deleteSchedule } from '../../services/database'; // Asegúrate de que las funciones de CRUD están implementadas
+import { fetchSchedules, addSchedule, updateSchedule, deleteSchedule } from '../../services/database'; 
 import { logInfo, logError } from '../../utils/logger';
 
 const ScheduleScreen: React.FC = () => {
-  const [schedule, setSchedule] = useState<any[]>([]); // Estado para los horarios
+  const [schedule, setSchedule] = useState<any[]>([]); // Asegúrate de que se inicialice como un arreglo vacío
   const [newSchedule, setNewSchedule] = useState({ start: '', end: '', subject: '' });
 
   // Cargar los horarios desde Firebase
@@ -13,10 +13,13 @@ const ScheduleScreen: React.FC = () => {
       try {
         const date = '2024-11-15';
         const scheduleData = await fetchSchedules(date);
-        const scheduleArray = Object.entries(scheduleData).map(([subject, schedule]: any) => ({
+
+        // Asegúrate de que los datos sean un arreglo, incluso si no hay horarios
+        const scheduleArray = scheduleData ? Object.entries(scheduleData).map(([subject, schedule]: any) => ({
           subject,
           ...schedule,
-        }));
+        })) : [];
+
         setSchedule(scheduleArray);
       } catch (error) {
         logError('Error al cargar los horarios', error);
@@ -31,7 +34,7 @@ const ScheduleScreen: React.FC = () => {
     try {
       await addSchedule('2024-11-15', newSchedule.subject, { start: newSchedule.start, end: newSchedule.end });
       logInfo('Horario agregado', { date: '2024-11-15', subject: newSchedule.subject, newSchedule });
-      
+
       // Refrescar los horarios después de agregar
       const updatedSchedules = await fetchSchedules('2024-11-15');
       setSchedule(updatedSchedules);
@@ -43,7 +46,7 @@ const ScheduleScreen: React.FC = () => {
   // Actualizar un horario
   const handleUpdateSchedule = async (subject: string) => {
     try {
-      const updatedSchedule = { start: '15:00', end: '16:30' }; // Aquí debes usar los valores que quieras actualizar
+      const updatedSchedule = { start: '15:00', end: '16:30' }; 
       await updateSchedule('2024-11-15', subject, updatedSchedule);
       logInfo('Horario actualizado', { date: '2024-11-15', subject, updatedSchedule });
 
@@ -72,13 +75,17 @@ const ScheduleScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Gestor de Horarios</Text>
-      {schedule.map((sched, index) => (
-        <View key={index} style={styles.scheduleBox}>
-          <Text style={styles.scheduleText}>{sched.subject}: {sched.start} - {sched.end}</Text>
-          <Button title="Actualizar" onPress={() => handleUpdateSchedule(sched.subject)} />
-          <Button title="Eliminar" onPress={() => handleDeleteSchedule(sched.subject)} />
-        </View>
-      ))}
+      {Array.isArray(schedule) && schedule.length > 0 ? (
+        schedule.map((sched, index) => (
+          <View key={index} style={styles.scheduleBox}>
+            <Text style={styles.scheduleText}>{sched.subject}: {sched.start} - {sched.end}</Text>
+            <Button title="Actualizar" onPress={() => handleUpdateSchedule(sched.subject)} />
+            <Button title="Eliminar" onPress={() => handleDeleteSchedule(sched.subject)} />
+          </View>
+        ))
+      ) : (
+        <Text>No hay horarios disponibles.</Text>
+      )}
       <TextInput
         style={styles.input}
         placeholder="Materia"
