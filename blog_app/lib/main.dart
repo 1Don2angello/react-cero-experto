@@ -27,6 +27,11 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+
+  void generateNewIdea() {
+    current = WordPair.random();
+    notifyListeners();
+  }
 }
 
 class MyHomePage extends StatelessWidget {
@@ -35,11 +40,44 @@ class MyHomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
 
     return Scaffold(
-      body: Column(
-        children: [
-          Text('A random idea:'),
-          Text(appState.current.asLowerCase),
-        ],
+      appBar: AppBar(
+        title: Text('Blog App Ideas'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'A random idea:',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              appState.current.asPascalCase,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.deepOrange,
+              ),
+            ),
+            SizedBox(height: 30),
+            ElevatedButton.icon(
+              onPressed: () {
+                appState.generateNewIdea();
+              },
+              icon: Icon(Icons.refresh),
+              label: Text('Generate New Idea'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepOrange,
+                foregroundColor: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
