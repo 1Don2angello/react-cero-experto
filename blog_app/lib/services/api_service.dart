@@ -1,16 +1,22 @@
-import 'package:http/http.dart' as http;
+import 'package:firebase_database/firebase_database.dart';
+import '../models/post.dart';
 
 class ApiService {
-  final String baseUrl;
+  final DatabaseReference _db = FirebaseDatabase.instance.ref();
 
-  ApiService(this.baseUrl);
-
-  Future<void> testRequest() async {
-    final response = await http.get(Uri.parse('$baseUrl/test'));
-    if (response.statusCode == 200) {
-      print('Success: ${response.body}');
-    } else {
-      print('Failed to load data');
+  Future<List<Post>> fetchPosts() async {
+    final snapshot = await _db.child('posts').get();
+    if (snapshot.exists) {
+      final data = Map<String, dynamic>.from(snapshot.value as Map);
+      return data.entries
+          .map((entry) => Post.fromMap(entry.key, Map<String, dynamic>.from(entry.value)))
+          .toList();
     }
+    return [];
+  }
+
+  Future<void> addPost(Post post) async {
+    final newPostRef = _db.child('posts').push();
+    await newPostRef.set(post.toMap());
   }
 }

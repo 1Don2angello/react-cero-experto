@@ -1,8 +1,17 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_auth_service.dart'; // Archivo donde manejarás la lógica de autenticación.
 
-void main() {
+
+void main() async {
+  // Asegúrate de inicializar el entorno de widgets de Flutter
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializa Firebase antes de correr la aplicación
+  await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
