@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import '../services/firebase_auth.dart';
 
 class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key}); // Agregar 'key' como parámetro nombrado
+
   @override
   AuthScreenState createState() => AuthScreenState(); // Cambiar nombre a público
 }
 
-class AuthScreenState extends State<AuthScreen> { // Cambiar nombre a público
+class AuthScreenState extends State<AuthScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final FirebaseAuthService _authService = FirebaseAuthService();
@@ -14,18 +16,20 @@ class AuthScreenState extends State<AuthScreen> { // Cambiar nombre a público
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Firebase Auth')),
+      appBar: AppBar(
+        title: const Text('Firebase Auth'), // Uso de const
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0), // Uso de const
         child: Column(
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'), // Uso de const
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'), // Uso de const
               obscureText: true,
             ),
             ElevatedButton(
@@ -35,10 +39,10 @@ class AuthScreenState extends State<AuthScreen> { // Cambiar nombre a público
                   _passwordController.text,
                 );
                 if (user != null) {
-                  print('User registered: ${user.email}');
+                  debugPrint('User registered: ${user.email}'); // Usar debugPrint en lugar de print
                 }
               },
-              child: Text('Register'),
+              child: const Text('Register'), // Uso de const
             ),
             ElevatedButton(
               onPressed: () async {
@@ -47,16 +51,16 @@ class AuthScreenState extends State<AuthScreen> { // Cambiar nombre a público
                   _passwordController.text,
                 );
                 if (user != null) {
-                  print('User signed in: ${user.email}');
+                  debugPrint('User signed in: ${user.email}'); // Usar debugPrint en lugar de print
                 }
               },
-              child: Text('Sign In'),
+              child: const Text('Sign In'), // Uso de const
             ),
             ElevatedButton(
               onPressed: () async {
                 await _authService.signOutUser();
               },
-              child: Text('Sign Out'),
+              child: const Text('Sign Out'), // Uso de const
             ),
           ],
         ),

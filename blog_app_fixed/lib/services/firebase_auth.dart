@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer' as developer; // Importar dart:developer para registros
 
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,7 +13,8 @@ class FirebaseAuthService {
       );
       return result.user;
     } catch (e) {
-      print('Error en el registro: $e');
+      // Usar developer.log en lugar de print
+      developer.log('Error en el registro', error: e, name: 'registerUser');
       return null;
     }
   }
@@ -26,7 +28,8 @@ class FirebaseAuthService {
       );
       return result.user;
     } catch (e) {
-      print('Error al iniciar sesión: $e');
+      // Usar developer.log en lugar de print
+      developer.log('Error al iniciar sesión', error: e, name: 'signInUser');
       return null;
     }
   }
@@ -36,7 +39,8 @@ class FirebaseAuthService {
     try {
       await _auth.signOut();
     } catch (e) {
-      print('Error al cerrar sesión: $e');
+      // Usar developer.log en lugar de print
+      developer.log('Error al cerrar sesión', error: e, name: 'signOutUser');
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer' as developer; // Importar el paquete de logging
 
 Future<void> registerUser(String email, String password) async {
   try {
@@ -11,10 +12,10 @@ Future<void> registerUser(String email, String password) async {
       password: password,
     );
 
-    // Imprimir la información del usuario registrado
-    print('User registered: ${userCredential.user}');
+    // Usar developer.log en lugar de print
+    developer.log('User registered: ${userCredential.user}');
   } catch (error) {
     // Manejo de errores
-    print('Error registering user: $error');
+    developer.log('Error registering user', error: error);
   }
 }

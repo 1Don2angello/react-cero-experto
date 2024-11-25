@@ -2,9 +2,6 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:blog_app/services/firebase_auth.dart';
-// Archivo donde manejarás la lógica de autenticación.
-
 
 void main() async {
   // Asegúrate de inicializar el entorno de widgets de Flutter
@@ -13,7 +10,7 @@ void main() async {
   // Inicializa Firebase antes de correr la aplicación
   await Firebase.initializeApp();
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +26,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         ),
-        home: MyHomePage(),
+        home: const MyHomePage(),
       ),
     );
   }
@@ -45,13 +42,15 @@ class MyAppState extends ChangeNotifier {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blog App Ideas'),
+        title: const Text('Blog App Ideas'),
         centerTitle: true,
       ),
       body: Padding(
@@ -59,28 +58,28 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'A random idea:',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               appState.current.asPascalCase,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 color: Colors.deepOrange,
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             ElevatedButton.icon(
               onPressed: () {
                 appState.generateNewIdea();
               },
-              icon: Icon(Icons.refresh),
-              label: Text('Generate New Idea'),
+              icon: const Icon(Icons.refresh),
+              label: const Text('Generate New Idea'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepOrange,
                 foregroundColor: Colors.white,

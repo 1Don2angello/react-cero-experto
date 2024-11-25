@@ -3,6 +3,8 @@ import '../models/post.dart';
 import '../services/api_service.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key}); // Añadir parámetro 'key'
+
   @override
   HomeScreenState createState() => HomeScreenState();
 }
@@ -14,18 +16,18 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blog Posts'),
+        title: const Text('Blog Posts'), // Uso de const
         centerTitle: true,
       ),
       body: FutureBuilder<List<Post>>(
         future: apiService.fetchPosts(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator()); // Uso de const
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData && snapshot.data!.isEmpty) {
-            return Center(child: Text('No posts available.'));
+            return const Center(child: Text('No posts available.')); // Uso de const
           } else {
             final posts = snapshot.data!;
             return ListView.builder(
@@ -45,7 +47,7 @@ class HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addNewPost(),
         backgroundColor: Colors.deepOrange,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add), // Uso de const
       ),
     );
   }
@@ -58,24 +60,24 @@ class HomeScreenState extends State<HomeScreen> {
         final contentController = TextEditingController();
 
         return AlertDialog(
-          title: Text('New Post'),
+          title: const Text('New Post'), // Uso de const
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: titleController,
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'), // Uso de const
               ),
               TextField(
                 controller: contentController,
-                decoration: InputDecoration(labelText: 'Content'),
+                decoration: const InputDecoration(labelText: 'Content'), // Uso de const
               ),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'), // Uso de const
             ),
             ElevatedButton(
               onPressed: () async {
@@ -89,11 +91,10 @@ class HomeScreenState extends State<HomeScreen> {
                     timestamp: DateTime.now(),
                   );
 
-                  // Ejecuta la operación asíncrona sin usar el BuildContext directamente
                   await _submitPost(newPost);
                 }
               },
-              child: Text('Add'),
+              child: const Text('Add'), // Uso de const
             ),
           ],
         );
@@ -104,7 +105,6 @@ class HomeScreenState extends State<HomeScreen> {
   Future<void> _submitPost(Post newPost) async {
     await apiService.addPost(newPost);
 
-    // Verifica si el widget aún está montado antes de cerrar el diálogo
     if (mounted) {
       Navigator.pop(context);
     }

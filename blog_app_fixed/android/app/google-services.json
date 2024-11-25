@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "863070273400",
+    "firebase_url": "https://mini-proyec-default-rtdb.firebaseio.com",
+    "project_id": "mini-proyec",
+    "storage_bucket": "mini-proyec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863070273400:android:be180aaff5c60cf396528d",
+        "android_client_info": {
+          "package_name": "com.example.blog_app_fixed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVPc0ePn0iXnRr0JiPocqN72uXVVjZvos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

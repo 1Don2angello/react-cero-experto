@@ -1,4 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'dart:developer' as developer; // Importar dart:developer para registros
 
 // Escribir datos
 Future<void> writeData() async {
@@ -13,9 +14,11 @@ Future<void> writeData() async {
       'timestamp': DateTime.now().toIso8601String(),
     });
 
-    print('Data written successfully');
+    // Usar developer.log en lugar de print
+    developer.log('Data written successfully', name: 'writeData');
   } catch (error) {
-    print('Error writing data: $error');
+    // Manejo de errores con developer.log
+    developer.log('Error writing data', error: error, name: 'writeData');
   }
 }
 
@@ -29,11 +32,12 @@ Future<void> readData() async {
     final DataSnapshot snapshot = await databaseRef.get();
 
     if (snapshot.exists) {
-      print('Data: ${snapshot.value}');
+      developer.log('Data: ${snapshot.value}', name: 'readData');
     } else {
-      print('No data available');
+      developer.log('No data available', name: 'readData');
     }
   } catch (error) {
-    print('Error reading data: $error');
+    // Manejo de errores con developer.log
+    developer.log('Error reading data', error: error, name: 'readData');
   }
 }
