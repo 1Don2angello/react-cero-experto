@@ -3,30 +3,30 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Registrar usuario con email y contraseña
+  // Registro con correo y contraseña
   Future<User?> registerUser(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return userCredential.user;
+      return result.user;
     } catch (e) {
-      print('Error registering user: $e');
+      print('Error en el registro: $e');
       return null;
     }
   }
 
-  // Iniciar sesión con email y contraseña
+  // Inicio de sesión con correo y contraseña
   Future<User?> signInUser(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return userCredential.user;
+      return result.user;
     } catch (e) {
-      print('Error signing in: $e');
+      print('Error al iniciar sesión: $e');
       return null;
     }
   }
@@ -35,14 +35,8 @@ class FirebaseAuthService {
   Future<void> signOutUser() async {
     try {
       await _auth.signOut();
-      print('User signed out');
     } catch (e) {
-      print('Error signing out: $e');
+      print('Error al cerrar sesión: $e');
     }
-  }
-
-  // Obtener usuario actual
-  User? getCurrentUser() {
-    return _auth.currentUser;
   }
 }

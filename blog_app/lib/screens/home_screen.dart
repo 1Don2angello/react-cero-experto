@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
 import '../models/post.dart';
 import '../services/api_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+
+class HomeScreenState extends State<HomeScreen> {
   final ApiService apiService = ApiService();
 
   @override
@@ -39,14 +43,14 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _addNewPost(context),
+        onPressed: () => _addNewPost(),
         backgroundColor: Colors.deepOrange,
         child: Icon(Icons.add),
       ),
     );
   }
 
-  void _addNewPost(BuildContext context) {
+  void _addNewPost() {
     showDialog(
       context: context,
       builder: (context) {
@@ -84,8 +88,9 @@ class HomeScreen extends StatelessWidget {
                     content: content,
                     timestamp: DateTime.now(),
                   );
-                  await apiService.addPost(newPost);
-                  Navigator.pop(context);
+
+                  // Ejecuta la operación asíncrona sin usar el BuildContext directamente
+                  await _submitPost(newPost);
                 }
               },
               child: Text('Add'),
@@ -94,5 +99,14 @@ class HomeScreen extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _submitPost(Post newPost) async {
+    await apiService.addPost(newPost);
+
+    // Verifica si el widget aún está montado antes de cerrar el diálogo
+    if (mounted) {
+      Navigator.pop(context);
+    }
   }
 }

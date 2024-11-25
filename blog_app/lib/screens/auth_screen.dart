@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'firebase_auth_service.dart';
+import '../services/firebase_auth.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
-  _AuthScreenState createState() => _AuthScreenState();
+  AuthScreenState createState() => AuthScreenState(); // Cambiar nombre a público
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class AuthScreenState extends State<AuthScreen> { // Cambiar nombre a público
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final FirebaseAuthService _authService = FirebaseAuthService();
