@@ -19,10 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # Cambia según tu proyecto
-
-      - name: Navigate to project directory
-        run: cd react-cero-experto/mini-project && pwd
+          node-version: '20'
 
       - name: Install dependencies
         working-directory: react-cero-experto/mini-project
