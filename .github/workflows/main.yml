@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         working-directory: mini-project
         run: npm install --legacy-peer-deps
-
+        
       - name: Checkout repository
         uses: actions/checkout@v3
 
