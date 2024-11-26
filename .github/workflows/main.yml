@@ -22,7 +22,7 @@ jobs:
           node-version: '16' # Cambia según tu proyecto
 
       - name: Navigate to project directory
-        working-directory: react-cero-experto/mini-project
+        working-directory: mini-project
         run: pwd
 
       - name: Install dependencies
