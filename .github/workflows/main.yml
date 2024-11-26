@@ -19,11 +19,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Cambia según tu proyecto
+          node-version: '10.8.3' # Cambia según tu proyecto
 
       - name: Navigate to project directory
-        working-directory: \react-cero-experto\mini-project
-        run: pwd
+        run: cd react-cero-experto/mini-project && pwd
 
       - name: Install dependencies
         working-directory: react-cero-experto/mini-project
@@ -33,6 +32,6 @@ jobs:
         working-directory: react-cero-experto/mini-project
         run: npm test
 
-      - name: Build the application2
+      - name: Build the application
         working-directory: react-cero-experto/mini-project
         run: npm run build
