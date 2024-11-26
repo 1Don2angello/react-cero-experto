@@ -1,43 +1,23 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'dart:developer' as developer; // Importar dart:developer para registros
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/post.dart';
 
-// Escribir datos
-Future<void> writeData() async {
-  try {
-    // Referencia a la base de datos
-    final DatabaseReference databaseRef = FirebaseDatabase.instance.ref('posts/newPostId');
+class FirestoreService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-    // Establecer los datos
-    await databaseRef.set({
-      'title': 'New Post Title',
-      'content': 'This is the content of the post.',
-      'timestamp': DateTime.now().toIso8601String(),
-    });
-
-    // Usar developer.log en lugar de print
-    developer.log('Data written successfully', name: 'writeData');
-  } catch (error) {
-    // Manejo de errores con developer.log
-    developer.log('Error writing data', error: error, name: 'writeData');
+  Future<void> addPost(Post post) async {
+    await _firestore.collection('posts').add(post.toMap());
   }
-}
 
-// Leer datos
-Future<void> readData() async {
-  try {
-    // Referencia a la base de datos
-    final DatabaseReference databaseRef = FirebaseDatabase.instance.ref('posts');
+  Future<List<Post>> fetchPosts() async {
+    final querySnapshot = await _firestore.collection('posts').get();
+    return querySnapshot.docs.map((doc) => Post.fromMap(doc.data())).toList();
+  }
 
-    // Obtener los datos
-    final DataSnapshot snapshot = await databaseRef.get();
+  Future<void> updatePost(String id, Post post) async {
+    await _firestore.collection('posts').doc(id).update(post.toMap());
+  }
 
-    if (snapshot.exists) {
-      developer.log('Data: ${snapshot.value}', name: 'readData');
-    } else {
-      developer.log('No data available', name: 'readData');
-    }
-  } catch (error) {
-    // Manejo de errores con developer.log
-    developer.log('Error reading data', error: error, name: 'readData');
+  Future<void> deletePost(String id) async {
+    await _firestore.collection('posts').doc(id).delete();
   }
 }
