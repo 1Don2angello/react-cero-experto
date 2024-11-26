@@ -35,4 +35,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send notification
-        run: echo "Pipeline completed!"
+        run: echo "Pipeline completed!!"
