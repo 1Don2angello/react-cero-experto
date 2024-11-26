@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: mini-project
-        run: npm install 
+        run: npm install --legacy-peer-deps
 
       - name: Run tests
         working-directory: mini-project
@@ -38,4 +38,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Log success message
+        if: success()
         run: echo "✅ CI Pipeline completed successfully!"
+
+      - name: Log failure message
+        if: failure()
+        run: echo "❌ CI Pipeline failed in the build step."
