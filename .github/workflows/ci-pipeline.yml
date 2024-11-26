@@ -22,7 +22,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run tests
         run: npm test
@@ -34,5 +34,5 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Send notification
-        run: echo "Pipeline completed!!"
+      - name: Log success message
+        run: echo "✅ CI Pipeline completed successfully!"
