@@ -22,13 +22,13 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        working-directory: react-cero-experto/mini-project
+        working-directory: mini-project
         run: npm install
 
       - name: Run tests
-        working-directory: react-cero-experto/mini-project
+        working-directory: mini-project
         run: npm test
 
       - name: Build the application
-        working-directory: react-cero-experto/mini-project
+        working-directory: mini-project
         run: npm run build
