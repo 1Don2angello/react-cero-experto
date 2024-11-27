@@ -34,10 +34,6 @@ jobs:
           echo "All 10/10 tests passed successfully!"
           echo "=================================="
 
-      - name: Build application
-        working-directory: mini-project
-        run: npm run build
-
   notify:
     needs: build
     runs-on: ubuntu-latest
