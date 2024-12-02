@@ -1,4 +1,4 @@
-package com.example.blog_app_expo.data.remote
+package com.example.blog_app_expo.data
 
 import com.example.blog_app_expo.data.model.Post
 import com.google.firebase.firestore.FirebaseFirestore

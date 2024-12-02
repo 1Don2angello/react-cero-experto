@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -61,7 +62,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
-    // Compose
+    // Jetpack Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -75,7 +76,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.3")
 
     // Firebase
-    implementation("com.google.firebase:firebase-bom:33.4.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
 
@@ -85,9 +86,4 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    // Firebase dependencies
-    implementation ("com.google.firebase:firebase-bom:33.4.0")
-    implementation ("com.google.firebase:firebase-firestore-ktx")
-    implementation ("com.google.firebase:firebase-auth-ktx")
-
 }
