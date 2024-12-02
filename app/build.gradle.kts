@@ -25,6 +25,9 @@ android {
         viewBinding = true
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.3"
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -64,6 +67,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,4 +75,25 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation("androidx.compose.ui:ui:1.5.3")
+    implementation("androidx.compose.material:material:1.5.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
+    implementation("androidx.navigation:navigation-compose:2.7.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
+    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation("androidx.compose.foundation:foundation:1.5.3")
+
+    // Navegación con Jetpack Compose
+    implementation("androidx.navigation:navigation-compose:2.7.3")
+
+// Jetpack Compose
+    implementation("androidx.compose.ui:ui:1.5.3")
+    implementation("androidx.compose.material3:material3:1.5.3")
+    implementation("androidx.compose.runtime:runtime:1.5.3")
+
+// Herramientas de desarrollo para Compose
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.3")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.3")
+
 }
