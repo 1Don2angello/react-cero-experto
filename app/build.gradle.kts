@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+
+
 android {
     namespace = "com.example.blog_app_expo"
     compileSdk = 34
@@ -19,7 +21,10 @@ android {
             useSupportLibrary = true
         }
     }
-
+    buildFeatures {
+        viewBinding = true
+        compose = true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
