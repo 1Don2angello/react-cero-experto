@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Azul brillante -->
+    <color name="blue_500">#2196F3</color>
+    <color name="blue_700">#1976D2</color>
+
+    <!-- Naranja vibrante -->
+    <color name="orange_500">#FF9800</color>
+    <color name="orange_700">#F57C00</color>
+
+    <!-- Otros colores (puedes dejarlos o editarlos según necesites) -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
